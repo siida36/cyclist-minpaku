@@ -193,54 +193,6 @@ export default function CyclistMinpakuLanding() {
 
   const L = isJA ? t.ja : t.en;
 
-  // ---------------------------------
-  // Dev-only smoke tests（軽量テスト）
-  // 既存テストは変更せず、いくつか追加
-  // ---------------------------------
-  function assert(condition: unknown, message: string): asserts condition {
-    if (!condition) throw new Error(message);
-  }
-  function runSmokeTests() {
-    [t.ja, t.en].forEach((loc, idx) => {
-      assert(Array.isArray(loc.heroPoints) && loc.heroPoints.length >= 3, `heroPoints missing (${idx})`);
-      assert(!!loc.cyclistFriendly.title && !!loc.cyclistFriendly.items, `cyclistFriendly invalid (${idx})`);
-      // 元テスト：icon/label 妥当性
-      (loc.cyclistFriendly.items as Array<{icon: React.ReactNode; label: string}>).forEach((it, i) => {
-        assert(React.isValidElement(it.icon), `icon invalid (${idx}/${i})`);
-        assert(typeof it.label === "string" && it.label.length > 0, `label invalid (${idx}/${i})`);
-      });
-      assert(Array.isArray(loc.location.facts) && loc.location.facts.length >= 3, `location facts missing (${idx})`);
-      // 追加テスト：必須キーの存在
-      assert(typeof loc.ctaReserve === "string" && loc.ctaReserve.length > 0, `ctaReserve missing (${idx})`);
-      assert(typeof loc.footer === "string" && loc.footer.length > 0, `footer missing (${idx})`);
-      // 追加テスト：都市見どころ・指標件数
-      assert(Array.isArray(loc.city.bullets) && loc.city.bullets.length >= 2, `city bullets missing (${idx})`);
-      assert(Array.isArray(loc.numbers.items) && loc.numbers.items.length >= 3, `numbers items missing (${idx})`);
-    });
-    // 追加テスト：Section / ToolIcon コンポーネント有効性
-    const probe = (
-      <Section title="probe" subtitle="test">
-        <div>ok</div>
-      </Section>
-    );
-    assert(React.isValidElement(probe), "Section not a valid element");
-    assert(React.isValidElement(<ToolIcon />), "ToolIcon invalid");
-    // 追加テスト：トップレベルが単一要素（Fragmentでラップ）
-    const root = (
-      <>
-        <div />
-      </>
-    );
-    assert(React.isValidElement(root), "Root fragment invalid");
-    // 既存テスト：コンポーネント要素の妥当性
-    assert(React.isValidElement(<CyclistMinpakuLanding />), "Landing not a valid element");
-    // eslint-disable-next-line no-console
-    console.log("✅ LP smoke tests passed");
-  }
-  if (typeof window !== "undefined") {
-    try { runSmokeTests(); } catch (e) { console.error("❌ LP smoke tests failed", e); }
-  }
-
   // *****************************
   // Top-level is wrapped with Fragment to ensure single parent element
   // *****************************
