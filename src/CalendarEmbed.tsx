@@ -1,5 +1,3 @@
-import React from "react";
-
 type Props = {
   /** 例: xxx@group.calendar.google.com */
   calendarId: string;

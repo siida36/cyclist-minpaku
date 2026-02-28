@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { Bike, MapPin, ShowerHead, Wrench, Phone, Mail, Calendar, Building2, Train, SunMedium, Waves, Home, Shield, Package, Info, Star, Fish, Store, CarFront, Disc3, Bed, Speech, TrainTrack, TrainFront, Mountain, Clock, Car} from "lucide-react";
+import { Bike, MapPin, ShowerHead, Wrench, Phone, Mail, Calendar, Building2, Train, SunMedium, Waves, Home, Shield, Package, Info, Store, CarFront, Disc3, Bed, Speech, TrainTrack, TrainFront, Mountain, Clock, Car} from "lucide-react";
 import { CalendarEmbed } from "./CalendarEmbed";
 
 // シングルファイルのランディングページ（React + Tailwind）
@@ -11,7 +11,7 @@ export default function CyclistMinpakuLanding() {
   // --- 写真の読み込み（public/photos 配下） ---
   // 例: public/photos/exterior-1.jpg を置けば、"/photos/exterior-1.jpg" で参照可能
   //const [lang, setLang] = useState<"ja" | "en">("ja");
-  const [lang, setLang] = useState<"ja">("ja");
+  const [lang] = useState<Lang>("ja");
   const isJA = lang === "ja";
 
   const t = {
@@ -402,17 +402,6 @@ function CheckDot() {
     <svg className="w-5 h-5 mt-0.5 text-slate-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <circle cx="12" cy="12" r="10" />
       <path d="M8 12l2.5 2.5L16 9" />
-    </svg>
-  );
-}
-
-// CDN依存を避けるためのローカルSVG版 ToolIcon
-function ToolIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
-      {/* 簡易レンチ風アイコン */}
-      <path d="M14.7 6.3a4 4 0 1 0-5.4 5.4l7 7a2 2 0 0 0 2.8-2.8l-7-7z" />
-      <path d="M5 19l3-3" />
     </svg>
   );
 }
