@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
-import { Bike, MapPin, ShowerHead, Wrench, Phone, Mail, Calendar, Building2, Train, SunMedium, Waves, Home, Shield, Package, Info, Star } from "lucide-react";
+import { Bike, MapPin, ShowerHead, Wrench, Phone, Mail, Calendar, Building2, Train, SunMedium, Waves, Home, Shield, Package, Info, Star, Fish, Store, CarFront, Disc3, Bed, Speech, TrainTrack, TrainFront, Mountain, Clock, Car} from "lucide-react";
+import { CalendarEmbed } from "./CalendarEmbed";
 
 // シングルファイルのランディングページ（React + Tailwind）
 // 画像と地図はプレースホルダ。将来：予約フォーム連携、地図埋め込み、レビュー、英語版切替など。
@@ -9,100 +10,86 @@ import { Bike, MapPin, ShowerHead, Wrench, Phone, Mail, Calendar, Building2, Tra
 export default function CyclistMinpakuLanding() {
   // --- 写真の読み込み（public/photos 配下） ---
   // 例: public/photos/exterior-1.jpg を置けば、"/photos/exterior-1.jpg" で参照可能
-  const [lang, setLang] = useState<"ja" | "en">("ja");
+  //const [lang, setLang] = useState<"ja" | "en">("ja");
+  const [lang, setLang] = useState<"ja">("ja");
   const isJA = lang === "ja";
 
   const t = {
     ja: {
-      name: "サイクリスト民泊（滑川）",
-      tagline: "富山湾と立山連峰を望む、サイクリストに優しい宿",
+      name: "民泊 吾妻 公式Webサイト",
+      tagline: "民泊 吾妻",
       ctaReserve: "空き状況・お問い合わせ",
       ctaReserveNote: "※オンライン予約は準備中です",
       heroPoints: [
-        "部屋続きのサイクル車庫（工具常備）",
-        "素泊まり／1Fくつろぎ・2F寝室",
-        "徒歩2分『あいらぶ湯』（立山展望・富山湾夕陽・深層水風呂）",
-        "お隣は魚屋さん／徒歩3分でショッピングセンター",
-        "越中富山など祭り動画鑑賞・足付将棋盤",
       ],
       cyclistFriendly: {
-        title: "サイクリストに優しいポイント",
-        desc: "富山県の『サイクリストに優しい宿』要件に沿って整備中（申請予定）。",
+        //title: "ご案内",
+        //desc: "富山県滑川市吾妻町の民泊です。",
         items: [
-          { icon: <Home className="w-5 h-5" />, label: "客室への自転車持ち込み可（または施錠保管可）" },
-          { icon: <Wrench className="w-5 h-5" />, label: "工具／空気入れ貸出（六角レンチ・タイヤレバー等）" },
-          { icon: <Package className="w-5 h-5" />, label: "手荷物一時預かり・宅配受取発送" },
-          { icon: <Shield className="w-5 h-5" />, label: "安全なサイクルガレージ（施錠可）" },
-          { icon: <ShowerHead className="w-5 h-5" />, label: "入浴は徒歩2分『あいらぶ湯』と連携（入湯券検討）" },
-          { icon: <WifiIcon />, label: "フリーWi‑Fi" },
+          { icon: <Home className="w-5 h-5" />, label: "素朴で自由な「素泊まり」のお宿" },
+          { icon: <Store className="w-5 h-5" />, label: "スーパー・ドラッグストアまで徒歩3分" },
+          { icon: <Bike className="w-5 h-5" />, label: "サイクル車庫あり・一階室内にも持ち込み可" },
+          { icon: <CarFront className="w-5 h-5" />, label: "近隣にお安い駐車場あり" },
+          { icon: <ShowerHead className="w-5 h-5" />, label: "入浴は徒歩3分『あいらぶ湯』へ" },
+          { icon: <Disc3 className="w-5 h-5" />, label: "富山県をはじめとしたお祭り資料を鑑賞可能" },
         ],
         optional: [
-          "洗濯機・ランドリー（導入検討）",
-          "自転車洗浄・作業スペース（整備検討）",
-          "周辺情報の提供（コース／グルメ）",
         ],
+      },
+      calendar: {
+        title: "カレンダー",
       },
       location: {
         title: "アクセス・周辺",
         facts: [
+          { icon: <Clock className="w-5 h-5" />, text: "『東京駅』より北陸新幹線経由で約3時間" },
+          { icon: <Car className="w-5 h-5" />, text: "『練馬IC』より上信越道経由で約4.5時間" },
           { icon: <Train className="w-5 h-5" />, text: "あいの風とやま鉄道『滑川駅』から徒歩約8分（約650m）" },
           { icon: <MapPin className="w-5 h-5" />, text: "県道139号線沿い／木造2階建て" },
           { icon: <SunMedium className="w-5 h-5" />, text: "『宿場回廊 瀬羽町』へ約800m／『ほたるいかミュージアム』へ約900m" },
           { icon: <Waves className="w-5 h-5" />, text: "富山湾クルージングや海の絶景スポットが近くに" },
+          { icon: <Mountain className="w-5 h-5" />, text: "立山登山の富山県側拠点『立山駅』まで車・電車で一時間前後" },
+          { icon: <TrainFront className="w-5 h-5" />, text: "あいの風とやま鉄道滑川駅より17分で『富山駅』へ" },
+          { icon: <TrainTrack className="w-5 h-5" />, text: "高岡・魚津・黒部などへも電車でアクセス可能" },
         ],
       },
       story: {
-        title: "プロジェクトストーリー",
+        title: "宿泊について",
         bullets: [
-          "現状のまま民泊事業の届出を行い、まずはターゲットを絞ってスタート",
-          "将来的にオンライン予約へ対応（段階導入）",
-          "宿泊を伴わない『サイクル休憩所』（11:00–16:00）としても活用",
-          "建屋の改修ポイントを洗い出し、費用対効果を見極めて着手",
-          "個人で厳しい場合は組織化（団体・会社化）し、協賛・出資も視野に",
-        ],
-      },
-      renew: {
-        title: "リニュアル計画（抜粋）",
-        bullets: [
-          "客室は2階へ集約し、1階と導線分離／2階に洗面・トイレ設置（簡易冷蔵庫）",
-          "収納不足の解消（特に2階）、建具ゆがみの調査・補修",
-          "電気回路増設（分電盤8回路）・コンセント入替、照明改善",
-          "窓まわり（内窓インプラス等で断熱・遮音）・錠改善・壁塗装・畳/障子/襖の刷新",
-          "車庫の活用（サイクルガレージ／来客動線）、防犯対策",
+          "一室7,500円/一泊、または2階貸し切り27,000円/一泊",
+          "現金のみ、リピーター特典あり",
+          "チェックイン午後3時から、チェックアウト午前10時まで",
+          "連絡先・予約は次にお電話をください → 080xxxxxxxx",
         ],
       },
       numbers: {
-        title: "データ・指標（抜粋）",
+        title: "設備のご案内",
         items: [
           {
-            icon: <Bike className="w-5 h-5" />,
-            label: "富山県湾岸サイクリングコース",
-            value: "ナショナルサイクルルート指定",
+            icon: <Bed className="w-5 h-5" />,
+            label: "宿泊室",
+            value: "2階8畳部屋・2階4.5畳部屋",
           },
           {
-            icon: <Calendar className="w-5 h-5" />,
-            label: "年間利用者（R4→R5）",
-            value: "約26,000人 → 約28,000人",
+            icon: <Speech className="w-5 h-5" />,
+            label: "交流場所",
+            value: "1階くつろぎスペース・2階休憩室",
           },
           {
-            icon: <Building2 className="w-5 h-5" />,
-            label: "滑川市人口（令和5年）",
-            value: "約33,185人／世帯約12,936",
+            icon: <ShowerHead className="w-5 h-5" />,
+            label: "アメニティ",
+            value: "タオル・シャンプー・洗濯乾燥機等",
           },
-          {
-            icon: <Star className="w-5 h-5" />,
-            label: "県内民泊数（2024/11）",
-            value: "滑川市 1（市内）",
-          },
+          
         ],
-        note: "※原資料に基づく概略値。最新値は自治体・観光統計をご確認ください。",
+        note: "",
       },
       city: {
-        title: "滑川の見どころ",
+        title: "宿主からのメッセージ",
         bullets: [
-          "ほたるいかミュージアム、宿場回廊",
-          "富山湾最深1,000m超の天然の生簀、夕景スポット",
-          "ふるさと竜宮まつり（2025年7月19–20日予定）、滑川ねぶた流し（7/31）、なめりかわランタン祭り（2025/8/7–10）",
+          "普通の民家で少しずつリフォームしています。至らない点はあろうかと思いますが、やすらぎ場所としてご利用頂ければ幸いです。",
+          "個人情報を含めお客様の情報を他者に漏らすことはありません。ただし、個人識別できない情報で行政等への数値情報報告はこの限りではありません。",
+          "反社会的行動、ハラスメント行動履歴の方はご遠慮ください。",
         ],
       },
       contact: {
@@ -113,10 +100,10 @@ export default function CyclistMinpakuLanding() {
         message: "メッセージ",
         send: "送信",
       },
-      footer: "© "+ new Date().getFullYear() + " Cyclist Minpaku Namerikawa",
+      footer: "© "+ new Date().getFullYear() + " Minpaku Azuma",
     },
     en: {
-      name: "Cyclist Minpaku (Namerikawa)",
+      name: "Minpaku Azuma",
       tagline: "Cyclist‑friendly stay with views of Toyama Bay & Tateyama Range",
       ctaReserve: "Contact / Availability",
       ctaReserveNote: "Online booking coming soon",
@@ -159,22 +146,12 @@ export default function CyclistMinpakuLanding() {
           "Consider incorporation for funding/operations if needed",
         ],
       },
-      renew: {
-        title: "Renovation Points",
-        bullets: [
-          "Bedrooms on 2F / separate guest flow; add washbasin & toilet on 2F",
-          "Fix storage shortage & fittings; electrical & lighting upgrades",
-          "Windows/locks/walls/tatami/shoji/fusuma refresh",
-          "Utilize garage as secure cycle space & guest entry; security",
-        ],
-      },
       numbers: {
         title: "Key Numbers",
         items: [
           { icon: <Bike className="w-5 h-5" />, label: "Toyama Bay Cycling Route", value: "National Cycle Route" },
           { icon: <Calendar className="w-5 h-5" />, label: "Annual users (FY2022→23)", value: "~26k → ~28k" },
           { icon: <Building2 className="w-5 h-5" />, label: "Namerikawa population (FY2023)", value: "~33,185" },
-          { icon: <Star className="w-5 h-5" />, label: "Minpaku in city (Nov 2024)", value: "1" },
         ],
         note: "Indicative; confirm latest stats with authorities.",
       },
@@ -207,12 +184,6 @@ export default function CyclistMinpakuLanding() {
               <span>{L.name}</span>
             </div>
             <div className="flex items-center gap-2">
-              <button
-                onClick={() => setLang(isJA ? "en" : "ja")}
-                className="px-3 py-1.5 rounded-xl border border-slate-300 text-sm hover:bg-slate-100"
-              >
-                {isJA ? "EN" : "日本語"}
-              </button>
               <a
                 href="mailto:info@example.com?subject=民泊お問い合わせ"
                 className="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-2xl bg-slate-900 text-white hover:opacity-90"
@@ -232,7 +203,14 @@ export default function CyclistMinpakuLanding() {
               </h1>
               <p className="mt-4 text-slate-600">
                 {isJA ? (
-                  <>宮大工施工の元・売薬さんの住まいをリノベ。<br className="hidden sm:inline"/>サイクルガレージ併設で、海と山、街と湯をコンパクトに楽しめます。</>
+                  <>
+                    宿主は祭りが好きで、特に富山の祭りに魅入っています。<br/>
+                    <br className="hidden sm:inline"/>
+                    昭和26年築のこの建屋は解体するには勿体ない。<br/>
+                    ここでお祭り動画を見ながらくつろいで頂けたら嬉しいです。<br/><br/>
+                    ここはサイクリストの走る道。<br/>
+                    富山湾クルージングにも立山登山のベースにもと、<br/>
+                    いろいろアイデアが浮かぶのではないでしょうか。 </>
                 ) : (
                   <>Renovated traditional wooden house with attached cycle garage—bay, mountains, baths, and town within easy reach.</>
                 )}
@@ -254,8 +232,11 @@ export default function CyclistMinpakuLanding() {
             </div>
             {/* <div className="aspect-[4/3] rounded-3xl bg-slate-200 shadow-inner overflow-hidden"> */}
             <div className="aspect-[4/3] rounded-3xl bg-slate-200 shadow-inner overflow-hidden">
-              {/* 画像プレースホルダ */}
-              <img src="photos/tateyama.png" alt="説明" />
+              <img
+                src="/photos/murodo.png"
+                className="h-full w-full object-cover object-[50%_70%]"
+                alt=""
+              />
             </div>
           </div>
         </section>
@@ -270,9 +251,19 @@ export default function CyclistMinpakuLanding() {
               </div>
             ))}
           </div>
-          <p className="text-xs text-slate-500 mt-3">
-            {isJA ? "任意項目（導入検討中）:" : "Optional (planned):"} {L.cyclistFriendly.optional.join("、 ")}
-          </p>
+        </Section>
+
+        {/* Calendar */}
+        <Section title={L.calendar.title}>
+          <CalendarEmbed
+            calendarId="YOUR_CALENDAR_ID@group.calendar.google.com"
+            timeZone="Asia/Tokyo"
+            height={700}
+            showTitle={false}
+            showTabs={true}
+            showPrint={false}
+            showNav={true}
+          />
         </Section>
 
         {/* Location */}
@@ -289,8 +280,8 @@ export default function CyclistMinpakuLanding() {
             <div className="rounded-3xl overflow-hidden border">
               {/* 地図プレースホルダ（必要に応じて Google Maps iframe を差し替え） */}
               <iframe
-                src={`https://www.google.com/maps?q=${encodeURIComponent(isJA ? "富山県滑川市 滑川駅" : "Namerikawa Station, Toyama")}&output=embed`}
-                title={isJA ? "滑川駅の地図" : "Map of Namerikawa Station"}
+                src={`https://www.google.com/maps?q=${encodeURIComponent(isJA ? "富山県滑川市吾妻町343" : "Azumacho 343, Namerikawa City, Toyama Pref.")}&output=embed`}
+                title={isJA ? "アクセスマップ" : "Access Map"}
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
                 className="w-full aspect-[4/3] border-0"
@@ -313,9 +304,9 @@ export default function CyclistMinpakuLanding() {
 
         {/* Numbers */}
         <Section title={L.numbers.title} subtitle={L.numbers.note}>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {L.numbers.items.map((n, i) => (
-              <div key={i} className="rounded-2xl border p-4 bg-white">
+              <div key={i} className="rounded-2xl border p-3 bg-white">
                 <div className="flex items-center gap-2 text-slate-600 text-sm"><span className="p-2 bg-slate-100 rounded-xl">{n.icon}</span> {n.label}</div>
                 <div className="mt-2 text-xl font-semibold">{n.value}</div>
               </div>
@@ -335,28 +326,17 @@ export default function CyclistMinpakuLanding() {
           </ul>
         </Section>
 
-        {/* Renovation */}
-        <Section title={L.renew.title}>
-          <ul className="space-y-2">
-            {L.renew.bullets.map((b, i) => (
-              <li key={i} className="flex items-start gap-3">
-                <ToolIcon className="w-5 h-5 mt-0.5 text-slate-500" />
-                <span className="text-sm leading-snug">{b}</span>
-              </li>
-            ))}
-          </ul>
-        </Section>
 
         {/* Gallery placeholder */}
         <Section title={isJA ? "フォト" : "Photos"} subtitle={isJA ? "外観・内観・ガレージなど" : "Exterior / Interior / Garage"}>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {[
-              "/photos/murodo.png",
-              "/photos/interior-1.jpg",
-              "/photos/garage-1.jpg",
-              "/photos/room-1.jpg",
-              "/photos/bath-1.jpg",
-              "/photos/neighborhood-1.jpg",
+              "/photos/lantern.jpg",
+              "/photos/snow_appearance.jpg",
+              "/photos/interior_view.jpg",
+              "/photos/sea.jpg",
+              "/photos/tateyama.png",
+              "/photos/station.jpg",
             ].map((src, i) => (
               <img
                 key={i}
