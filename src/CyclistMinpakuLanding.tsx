@@ -1,5 +1,4 @@
 import React from "react";
-import { useState } from "react";
 import { Bike, MapPin, ShowerHead, Wrench, Phone, Mail, Calendar, Building2, Train, SunMedium, Waves, Home, Shield, Package, Info, Store, CarFront, Disc3, Bed, Speech, TrainTrack, TrainFront, Mountain, Clock, Car} from "lucide-react";
 import { CalendarEmbed } from "./CalendarEmbed";
 
@@ -11,8 +10,7 @@ export default function CyclistMinpakuLanding() {
   // --- 写真の読み込み（public/photos 配下） ---
   // 例: public/photos/exterior-1.jpg を置けば、"/photos/exterior-1.jpg" で参照可能
   //const [lang, setLang] = useState<"ja" | "en">("ja");
-  const [lang] = useState<Lang>("ja");
-  const isJA = lang === "ja";
+  const isJA = "ja" === "ja";
 
   const t = {
     ja: {
@@ -23,7 +21,7 @@ export default function CyclistMinpakuLanding() {
       heroPoints: [
       ],
       cyclistFriendly: {
-        //title: "ご案内",
+        title: "ご案内",
         //desc: "富山県滑川市吾妻町の民泊です。",
         items: [
           { icon: <Home className="w-5 h-5" />, label: "素朴で自由な「素泊まり」のお宿" },
@@ -168,7 +166,8 @@ export default function CyclistMinpakuLanding() {
     },
   } as const;
 
-  const L = isJA ? t.ja : t.en;
+  //const L = isJA ? t.ja : t.en;
+  const L = t.ja
 
   // *****************************
   // Top-level is wrapped with Fragment to ensure single parent element
@@ -242,7 +241,7 @@ export default function CyclistMinpakuLanding() {
         </section>
 
         {/* Cyclist Friendly */}
-        <Section title={L.cyclistFriendly.title} subtitle={L.cyclistFriendly.desc}>
+        <Section title={L.cyclistFriendly.title}>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {L.cyclistFriendly.items.map((it, idx) => (
               <div key={idx} className="flex items-center gap-3 p-4 rounded-2xl border bg-white">
