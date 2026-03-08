@@ -170,8 +170,8 @@ export default function CyclistMinpakuLanding() {
   const L = t.ja
 
   const INSTAGRAM_POSTS = [
-  { shortcode: "DVnU9G-kWzV" },
-];
+    { shortcode: "DVnU9G-kWzV" },
+  ];
 
   // *****************************
   // Top-level is wrapped with Fragment to ensure single parent element
@@ -330,42 +330,48 @@ export default function CyclistMinpakuLanding() {
           </ul>
         </Section>
 
-        {/* Instagram */}
-        <Section
-          title={isJA ? "Instagram" : "Instagram"}
-          subtitle={
-            isJA
-              ? "最新の雰囲気はInstagramでもご覧いただけます"
-              : "See more updates on Instagram"
-          }
-        >
-          <InstagramGrid posts={INSTAGRAM_POSTS} isJA={isJA} />
-        </Section>
-
 
         {/* Gallery placeholder */}
-        <Section title={isJA ? "フォト" : "Photos"} subtitle={isJA ? "富山の自然と文化" : "Exterior / Interior / Garage"}>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {[
-              "/photos/lantern.jpg",
-              "/photos/snow_appearance.jpg",
-              "/photos/interior_view.jpg",
-              "/photos/sea.jpg",
-              "/photos/tateyama.png",
-              "/photos/station.jpg",
-            ].map((src, i) => (
-              <img
-                key={i}
-                src={src}
-                alt={isJA ? `写真 ${i + 1}` : `Photo ${i + 1}`}
-                loading="lazy"
-                className="aspect-[4/3] w-full rounded-2xl object-cover"
-                onError={(e) => { e.currentTarget.outerHTML =
-                  `<div class='aspect-[4/3] w-full rounded-2xl bg-slate-200 flex items-center justify-center text-slate-500'>
-                     ${isJA ? "画像を /public/photos に追加してください" : "Add images to /public/photos"}
-                   </div>`}}
-              />
-            ))}
+        <Section
+          title={isJA ? "Instagram & ギャラリー" : "Photos"}
+          subtitle={isJA ? "富山の自然と文化" : "Nature and culture of Toyama"}
+        >
+          <div className="grid lg:grid-cols-[minmax(0,0.64fr)_minmax(0,0.8fr)] gap-6 items-start">
+            {/* 左: Instagram */}
+            <div className="min-w-0 w-full">
+              <InstagramGrid posts={INSTAGRAM_POSTS} isJA={isJA} />
+            </div>
+
+            {/* 右: 画像ギャラリー */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {[
+                "/photos/lantern.jpg",
+                "/photos/snow_appearance.jpg",
+                "/photos/interior_view.jpg",
+                "/photos/sea.jpg",
+                "/photos/tateyama.png",
+                "/photos/station.jpg",
+              ].map((src, i) => (
+                <figure
+                  key={i}
+                  className="overflow-hidden rounded-2xl border bg-white"
+                >
+                  <img
+                    src={src}
+                    alt={isJA ? `写真 ${i + 1}` : `Photo ${i + 1}`}
+                    loading="lazy"
+                    className="aspect-[4/3] w-full object-cover"
+                    onError={(e) => {
+                      e.currentTarget.outerHTML = `
+                        <div class='aspect-[4/3] w-full bg-slate-200 flex items-center justify-center text-slate-500'>
+                          ${isJA ? "画像を /public/photos に追加してください" : "Add images to /public/photos"}
+                        </div>
+                      `
+                    }}
+                  />
+                </figure>
+              ))}
+            </div>
           </div>
         </Section>
 
@@ -440,7 +446,7 @@ function InstagramGrid({
   isJA: boolean;
 }) {
   return (
-    <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
+    <div className="grid md:grid-cols-2 xl:grid-cols-1 gap-4">
       {posts.map((post, i) => (
         <div key={i} className="rounded-2xl overflow-hidden border bg-white">
           <iframe
