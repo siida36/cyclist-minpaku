@@ -169,6 +169,10 @@ export default function CyclistMinpakuLanding() {
   //const L = isJA ? t.ja : t.en;
   const L = t.ja
 
+  const INSTAGRAM_POSTS = [
+  { shortcode: "DVnU9G-kWzV" },
+];
+
   // *****************************
   // Top-level is wrapped with Fragment to ensure single parent element
   // *****************************
@@ -203,6 +207,7 @@ export default function CyclistMinpakuLanding() {
               <p className="mt-4 text-slate-600">
                 {isJA ? (
                   <>
+                    -富山県滑川市吾妻町343-<br/><br/>
                     宿主は祭りが好きで、特に富山の祭りに魅入っています。<br/>
                     <br className="hidden sm:inline"/>
                     昭和26年築のこの建屋は解体するには勿体ない。<br/>
@@ -255,7 +260,7 @@ export default function CyclistMinpakuLanding() {
         {/* Calendar */}
         <Section title={L.calendar.title}>
           <CalendarEmbed
-            calendarId="YOUR_CALENDAR_ID@group.calendar.google.com"
+            calendarId="minpaku.aduma@gmail.com"
             timeZone="Asia/Tokyo"
             height={700}
             showTitle={false}
@@ -325,9 +330,21 @@ export default function CyclistMinpakuLanding() {
           </ul>
         </Section>
 
+        {/* Instagram */}
+        <Section
+          title={isJA ? "Instagram" : "Instagram"}
+          subtitle={
+            isJA
+              ? "最新の雰囲気はInstagramでもご覧いただけます"
+              : "See more updates on Instagram"
+          }
+        >
+          <InstagramGrid posts={INSTAGRAM_POSTS} isJA={isJA} />
+        </Section>
+
 
         {/* Gallery placeholder */}
-        <Section title={isJA ? "フォト" : "Photos"} subtitle={isJA ? "外観・内観・ガレージなど" : "Exterior / Interior / Garage"}>
+        <Section title={isJA ? "フォト" : "Photos"} subtitle={isJA ? "富山の自然と文化" : "Exterior / Interior / Garage"}>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {[
               "/photos/lantern.jpg",
@@ -412,5 +429,28 @@ function WifiIcon() {
       <path d="M8.5 16a6 6 0 0 1 7 0" />
       <path d="M12 20h.01" />
     </svg>
+  );
+}
+
+function InstagramGrid({
+  posts,
+  isJA,
+}: {
+  posts: { shortcode: string }[];
+  isJA: boolean;
+}) {
+  return (
+    <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
+      {posts.map((post, i) => (
+        <div key={i} className="rounded-2xl overflow-hidden border bg-white">
+          <iframe
+            src={`https://www.instagram.com/p/${post.shortcode}/embed/captioned/`}
+            title={isJA ? `Instagram投稿 ${i + 1}` : `Instagram post ${i + 1}`}
+            className="w-full min-h-[700px] border-0"
+            loading="lazy"
+          />
+        </div>
+      ))}
+    </div>
   );
 }
